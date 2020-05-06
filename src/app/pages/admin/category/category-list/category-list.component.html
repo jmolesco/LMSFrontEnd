@@ -1,0 +1,102 @@
+<ol class="breadcrumb">
+    <li><a href="#">Dashboard</a></li>
+    <li><a href="#">Maintenance</a></li>
+    <li class="active">Category</li>
+</ol>
+<div class="row">
+    <div class="col-xs-12 col-lg-12">
+        <div class="panel panel-default paper-shadow">
+            <div class="panel-heading">
+                <h4 class="text-headline">
+                    New Category
+                </h4>
+            </div>
+            <div class="panel-body">
+                <table class="table table-hover">
+                
+                  <thead >
+                    <tr>
+                      <th>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Options</label>
+                          </div>
+                          <select class="custom-select" id="inputGroupSelect01" [(ngModel)]="status" (change)="submitSearch()">
+                            <option value="0">All</option>
+                            <option value="1">Active</option>
+                            <option value="2">InActive</option>
+                          </select>
+                        </div>
+                      </th>      
+                      <th>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Order By</label>
+                          </div>
+                          <select class="custom-select" id="inputGroupSelect01" [(ngModel)]="orderKey" (change)="submitSearch()">
+                            <option value="0">Choose</option>
+                            <option value="1">ID</option>
+                            <option value="2">Name</option>
+                          </select>
+                        </div>
+                        
+                      </th>     
+                      <th>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Order Type</label>
+                          </div>
+                          <select class="custom-select" id="inputGroupSelect01" [(ngModel)]="orderType" (change)="submitSearch()">                           <option value="0">Choose</option>
+                            <option value="1">ASC</option>
+                            <option value="2">DESC</option>
+                          </select>
+                        </div>
+                      </th>     
+                      <th>
+                        
+                      </th>          
+                    </tr>
+                  </thead>
+                    <thead >
+                      <tr>
+                        <th scope="col" class="text-center">#</th>
+                        <th scope="col" class="text-center">Category Name</th>
+                        <th scope="col" class="text-center">Status</th>
+                        <th scope="col" class="text-center">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let category of categories; index as i">
+                        <th scope="row" class="text-center">{{ category.ncategory_id }}</th>
+                        <td class="text-center">
+                          {{ category.scategory_name }}
+                        </td>
+                        <td class="text-center">
+                          <span 
+                          [ngClass]="['badge',(category.status===1)===true?'btn-success':'btn-danger']">{{ category.statusName }}</span>
+                           
+                          
+                        </td>
+                        <td class="text-center">
+                              <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Edit record # {{category.ncategory_id}}">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                              </button>&nbsp;&nbsp;
+                              <button type="button" data-toggle="tooltip" data-placement="right" title="Deactivate record # {{category.ncategory_id}}" [ngClass]="['btn btn-danger',(category.status===1)===true?'':'hide']"><i class="fa fa-ban" aria-hidden="true"></i>
+                              </button>
+                              <button type="button" data-toggle="tooltip" data-placement="right" title="Activate record # {{category.ncategory_id}}" [ngClass]="['btn btn-success',(category.status===1)===true?'hide':'']"><i class="fa fa-plus-circle" aria-hidden="true"></i>
+                              </button>
+                         </td>
+          
+                      </tr>
+                     
+                      <tr>
+                          <th></th>
+                          <td colspan="2"></td>
+                          <td></td>
+                      </tr>
+                     </tbody>
+                  </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "LMSFrontEnd"
+    }
+  },
+  "defaultProject": "LMSFrontEnd",
+  "cli": {
+    "analytics": "18f8f1e8-4431-4053-be79-8ccec7903b8b"
+  }
 }

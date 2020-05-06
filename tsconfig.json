@@ -1,7 +1,19 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "./src",
+    "paths": {
+      "@shared/*":["./app/shared/*"],
+      "@pages/*":["./app/pages/*"],
+      "@pagesAdmin/*":["./app/pages/admin*"],
+      "@environment/*":["./environments/*"],
+      "@sharedPages/*":["./app/shared/pages/*"],
+      "@sharedPagesAdmin/*":["./app/shared/pages/admin/*"],
+      "@sharedPagesUser/*":["./app/shared/pages/user/*"],
+      "@sharedHelper/*":["./app/shared/helpers/*"],
+      "@sharedHelperGraphQL/*":["./app/shared/helpers/graphql/*"],
+      "@sharedService/*":["./app/shared/services/*"],
+    },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
