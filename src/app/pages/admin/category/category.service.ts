@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BaseService} from '@sharedService/base.service';
-import {categoryList} from '@sharedHelper/graphql'
+import {categoryList, submitDeleteAction} from '@sharedHelper/graphql'
 
 @Injectable({
   providedIn: 'root'
@@ -32,4 +32,18 @@ export class CategoryService {
     };
     return this.baseService.getResponseAllQuery(categoryList, variables);  
   }
+  public submitMutation(data, refreshVar){
+    const variables = {
+      categoryDeleteInput:{  ncategory_id:data.id, status:data.status}
+    }
+    
+    const refreshVariables = { 
+      pager: {	page:parseInt(refreshVar.pageNumber)},
+      filterStatus: { status: parseInt(refreshVar.status) },
+      searchKeyword:{ keyword: refreshVar.keyword},
+      orderBy:{ orderKey:parseInt(refreshVar.orderKey), orderType:parseInt(refreshVar.orderType)}
+    };
+    return this.baseService.submitActionMutation(submitDeleteAction, variables, categoryList, refreshVariables);
+  }
+
 }

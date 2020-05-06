@@ -1,0 +1,7 @@
+<ul class="pagination margin-top-none">
+    <li [ngClass]="[(previousState?'disabled':'')]"><a (click)="previousPage()">&laquo;</a></li>
+    <li *ngFor="let item of pageList; index as i">
+        <a (click)="submitRequestPage(pageList[i])">{{pageList[i]}}</a>
+    </li>
+    <li [ngClass]="[(nextState?'disabled':'')]"><a (click)="nextPage()">&raquo;</a></li>
+</ul>

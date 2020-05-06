@@ -55,13 +55,24 @@ export class BaseService {
     return response;
   }
 
-  public getResponseAllQuery(query:any, variables: any){
-    return this.apollo.watchQuery({
+  public getResponseAllQuery(query:any, variables?: any){
+    return this.apollo.watchQuery<any>({
             query:query,
-            variables: variables
+            variables: variables,
           })
           .valueChanges
               .pipe(map(result => result.data));           
+  }
+
+  public submitActionMutation(mutation?:any, variables?:any, refreshQueries?:any, refreshVar?:any){
+    return this.apollo.mutate({
+      mutation:mutation,
+      variables: variables,
+      refetchQueries:[{
+        query:refreshQueries,
+        variables:refreshVar
+      }],
+    });           
   }
 
   handleError(error: HttpErrorResponse){

@@ -24,7 +24,7 @@ export const categoryList = gql`
                     {
                     totalPage
                     totalRecords
-                    totalPerPage
+                    currentPage
                     }
             }          
         }
@@ -42,3 +42,9 @@ export const categoryDetail = gql`
             }
         }
         `;
+export const submitDeleteAction = gql`
+        mutation ($categoryDeleteInput:CategoryDeleteInput!)  
+        {
+            deleteCategory(categoryDeleteInput:$categoryDeleteInput)
+        }
+    `;
