@@ -1,6 +1,6 @@
 <ol class="breadcrumb">
   <li><a routerLink="/">Dashboard</a></li>
-  <li><a routerLink="/user/category">Maintenance</a></li>
+  <li><a routerLink="/admin/category">Maintenance</a></li>
   <li class="active">Category</li>
 </ol>
 <div class="row">
@@ -109,7 +109,7 @@
 
               </td>
               <td class="text-center">
-                <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="right"
+                <button type="button" routerLink="{{category.ncategory_id}}" class="btn btn-primary" data-toggle="tooltip" data-placement="right"
                   title="Edit record # {{category.ncategory_id}}">
                   <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 </button>&nbsp;&nbsp;

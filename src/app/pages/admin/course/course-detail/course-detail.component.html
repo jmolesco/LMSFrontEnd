@@ -1,0 +1,145 @@
+<ol class="breadcrumb">
+    <li><a routerLink="/">Dashboard</a></li>
+    <li><a routerLink="/admin/course">Maintenance</a></li>
+    <li><a routerLink="/admin/course">Course</a></li>
+    <li class="active">Course Detail</li>
+</ol>
+<div class="row">
+    <div class="col-xs-12 col-lg-12">
+        <div class="panel panel-default paper-shadow">
+            <div class="panel-heading">
+                <div class="media v-middle">
+                    <div class="media-left">
+                        <div class="bg-light-blue-300 text-white">
+                            <div class="panel-body">
+                                <i class="fa fa-bars fa-fw fa-2x"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="text-headline">
+                            {{actionType}} Course
+                        </h4>
+                    </div>
+                    <div class="media-right media-padding">
+                        <button routerLink="/admin/category" type="button" class="btn btn-primary paper-shadow relative"
+                            data-z="0.5" data-hover-z="1" data-animated="">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-left"
+                                aria-hidden="true"></i>&nbsp;&nbsp;Go
+                            Back&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <form (ngSubmit)="functionState===false?submitInsertRecord():submitEditRecord()" #detailForm="ngForm">
+                    <div class="col-md-8">
+
+                        <div class="form-group" *ngIf="functionState">
+                            <label for="inputEmail3" class="col-md-12 control-label">Course ID </label>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input class="input form-control" type="text" placeholder="Course ID"
+                                            [(ngModel)]="id" name="id" [disabled]="true">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-md-12 control-label">Course Name</label>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input class="input form-control" type="text" placeholder="Course Name"
+                                            [(ngModel)]="name" #nameInput="ngModel" name="name" required />
+                                        <p class="help btn-danger" *ngIf="nameInput.invalid && nameInput.touched">
+                                            Course Name is required
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-md-12 control-label">Course Description</label>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <textarea class="input form-control" type="text" rows="12"
+                                            placeholder="Course Description" [(ngModel)]="description"
+                                            #descriptionInput="ngModel" name="description" required> </textarea>
+                                        <p class="help btn-danger"
+                                            *ngIf="descriptionInput.invalid && descriptionInput.touched">
+                                            Course Description is required
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-md-12 control-label">Category Name</label>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <!-- <input class="input form-control" type="text" placeholder="Category Name"
+                                            [(ngModel)]="categoryId" #categoryIdInput="ngModel" name="categoryId" required /> -->
+                                            <select id="country" data-toggle="select2" class="input form-control"
+                                            [(ngModel)]="categoryId" #categoryIdInput="ngModel" name="categoryId"
+                                            >
+                                                <option value="0">Choose Category</option>
+                                                <option *ngFor="let course of categoryList; index as i" value="{{course.ncategory_id}}">{{course.scategory_name}}</option>
+                                              </select>
+                                        <p class="help btn-danger" *ngIf="categoryIdInput.invalid && categoryIdInput.touched">
+                                            Category Name is required
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">&nbsp;</div>
+                            <div class="row text-center">
+                                <div class="col-md-12 ">
+                                    <button type="submit" class="btn btn-primary paper-shadow relative" data-z="0.5"
+                                        data-hover-z="1" data-animated [disabled]="detailForm.invalid">Submit
+                                        Record</button>
+                                        &nbsp;
+                                    <button class="btn btn-default"
+                                        routerLink="/admin/course">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Go
+                                        Back&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-md-12 control-label">Upload Photo</label>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input class="input form-control" type="file" placeholder="Upload Photo"
+                                            [(ngModel)]="photo" #photoInput="ngModel" name="photo" />
+                                    </div>
+                                    <p class="help btn-danger" *ngIf="photoInput.invalid && photoInput.touched">
+                                        Photo is required
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <img src="../../../../../assets/images/people/110/guy-6.jpg" alt="people"  style="width: 100%;"/>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

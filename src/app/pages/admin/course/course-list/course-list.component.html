@@ -1,0 +1,157 @@
+<ol class="breadcrumb">
+    <li><a routerLink="/">Dashboard</a></li>
+    <li><a routerLink="/admin/course">Maintenance</a></li>
+    <li class="active">Course</li>
+  </ol>
+  <div class="row">
+    <div class="col-xs-12 col-lg-12">
+      <div class="panel panel-default paper-shadow">
+        <div class="panel-heading">
+          <div class="media v-middle">
+            <div class="media-left">
+              <div class="bg-light-blue-300 text-white">
+                <div class="panel-body">
+                  <i class="fa fa-bars fa-fw fa-2x"></i>
+                </div>
+              </div>
+            </div>
+            <div class="media-body">
+              <h4 class="text-headline">
+                List of Courses
+              </h4>
+            </div>
+            <div class="media-right media-padding">
+              <button routerLink="new" type="button" class="btn btn-primary paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated=""
+                title="Add New Record">
+                <i class="fa fa-plus-circle" aria-hidden="true"></i> &nbsp;Add New Record
+              </button>
+       
+            </div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <table class="table table-hover">
+  
+            <thead>
+              <tr>
+                <th colspan="2" class="text-center">
+                  <div class="input-group input-group form-control">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="inputGroupSelect01">Filter By</label>
+                    </div>
+                    <select class="select input-group-sm form-control" id="inputGroupSelect01" [(ngModel)]="status"
+                      (change)="submitSearch()">
+                      <option value="0">All</option>
+                      <option value="1">Active</option>
+                      <option value="2">InActive</option>
+                    </select>
+                  </div>
+                </th>
+                <th colspan="2" class="text-center">
+                  <div class="input-group input-group form-control">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="inputGroupSelect01">Order By</label>
+                    </div>
+                    <select class="select input-group-sm form-control" id="inputGroupSelect01" [(ngModel)]="orderKey"
+                      (change)="submitSearch()">
+                      <option value="0">Choose</option>
+                      <option value="1">ID</option>
+                      <option value="2">Name</option>
+                      <option value="2">Category</option>
+                    </select>
+                  </div>
+                </th>
+                <th colspan="2" class="text-center">
+                  <div class="input-group input-group form-control">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="inputGroupSelect01">Order By</label>
+                    </div>
+                    <select class="select input-group-sm form-control" id="inputGroupSelect01" [(ngModel)]="orderType"
+                      (change)="submitSearch()">
+                      <option value="0">Choose</option>
+                      <option value="1">ASC</option>
+                      <option value="2">DESC</option>
+                    </select>
+                  </div>
+                </th>
+                <th colspan="2" class="text-center">
+                  <div class="input-group input-group form-control">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="inputGroupSelect01">Search Any Keyword</label>
+                    </div>
+                    <input type="text" class="input-group-sm form-control" (keyup)="submitSearch()" type="text"
+                      placeholder="Search Course Name" [(ngModel)]="keyword">
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <thead>
+              <tr>
+                <th scope="col" class="text-center">#</th>
+                <th scope="col" class="text-center">Course Name</th>
+                <th scope="col" class="text-center">Description</th>
+                <th scope="col" class="text-center">Category</th>
+                <th scope="col" class="text-center">Created By</th>
+                <th scope="col" class="text-center">Updated By</th>
+                <th scope="col" class="text-center">Status</th>
+                <th scope="col" class="text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let course of courses; index as i">
+                <th scope="row" class="text-center">{{ course.ncourse_id }}</th>
+                <td class="text-center">
+                  {{ course.scourse_title }}
+                </td>
+                <td class="text-center">
+                    {{ course.scourse_description }}
+                </td>
+                <td class="text-center">
+                    {{ course.scategory_name }}
+                </td>
+                <td class="text-center">
+                    {{ course.ncreated_by }}
+                </td>
+                <td class="text-center">
+                    {{ course.nupdated_by }}
+                </td>
+                <td class="text-center">
+                  <span
+                    [ngClass]="['badge',(course.status===1)===true?'btn-success':'btn-danger']">
+                    <span [ngClass]="[(course.status===1)===true?'invisible':'hidden']">.</span>
+                    {{ course.statusName }}
+                    <span [ngClass]="[(course.status===1)===true?'invisible':'hidden']">.</span>
+                  </span>
+                </td>
+                <td class="text-center">
+                  <button type="button" routerLink="{{course.ncourse_id}}" class="btn btn-primary" data-toggle="tooltip" data-placement="right"
+                    title="Edit record # {{course.ncourse_id}}">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  </button>&nbsp;&nbsp;
+                  <button type="button" (click)="submitUpdateStatus(course.ncourse_id, 0)" data-toggle="tooltip"
+                    data-delay='{"show":"500", "hide":"100"}'
+                    data-placement="right" title="Deactivate record # {{course.ncourse_id}}"
+                    [ngClass]="['btn btn-danger',(course.status===1)===true?'':'hide']"><i class="fa fa-ban"
+                      aria-hidden="true"></i>
+                  </button>
+                  <button type="button" (click)="submitUpdateStatus(course.ncourse_id, 1)" data-toggle="tooltip"
+                    data-placement="right" title="Activate record # {{course.ncourse_id}}"
+                    [ngClass]="['btn btn-success',(course.status===1)===true?'hide':'']"><i class="fa fa-plus-circle"
+                      aria-hidden="true"></i>
+                  </button>
+                </td>
+  
+              </tr>
+  
+              <tr>
+                <td class="text-center" colspan="8">
+                  <app-pagination *ngIf="totalPageList" [paginationTotal]="totalPageList"
+                    [paginationTotaPage]="totalPageNumber"></app-pagination>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>

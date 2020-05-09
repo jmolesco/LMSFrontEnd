@@ -1,17 +1,16 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CategoryService } from '../category.service';
+import { Component, OnInit } from '@angular/core';
+import { CourseService } from '../course.service';
 import {constantKeywords as keyword} from '@sharedHelper/constantKeywords';
 import {dataFilter} from '@sharedHelper/helperFunction'; 
 import {ChildService} from '@sharedService/child.service';
 import { Subscription } from 'rxjs';
-
 @Component({
-  selector: 'app-category-list',
-  templateUrl: './category-list.component.html',
-  styleUrls: ['./category-list.component.sass']
+  selector: 'app-course-list',
+  templateUrl: './course-list.component.html',
+  styleUrls: ['./course-list.component.sass']
 })
-export class CategoryListComponent implements OnInit, OnDestroy  {
-  categories;
+export class CourseListComponent implements OnInit {
+  courses;
   currentPage:number = 1;
   status:number = 1;
   keyword:string = "";
@@ -20,25 +19,21 @@ export class CategoryListComponent implements OnInit, OnDestroy  {
   totalPageList:number = 0;
   totalPageNumber:number = 0;
 
-  private querySubscription: Subscription;
-
   constructor(
-    private service:CategoryService,
+    private service:CourseService,
     private childService: ChildService
   ) {
     if(this.childService.subsVar!==undefined){
       this.childService.subsVar = undefined;     
     }
    }
-
-
-  onLoad(data):void{    
-    this.querySubscription = this.service.getCategoryList(data)
+   onLoad(data):void{    
+    this.service.getAllList(data)
         .subscribe(results=>
         { 
-            var result  = results[keyword.categoryList];
+            var result  = results[keyword.courseList];
             var pageInfo = result[keyword.pageInfo];
-            this.categories = dataFilter(result[keyword.listKeyword]);
+            this.courses = dataFilter(result[keyword.listKeyword]);
             this.currentPage = pageInfo[keyword.currentPage];            
             this.totalPageList = pageInfo[keyword.totalRecords];
             this.totalPageNumber =pageInfo[keyword.totalPage];
@@ -57,28 +52,23 @@ export class CategoryListComponent implements OnInit, OnDestroy  {
       // THIS FUNCTION IS USED WHEN PAGE NUMBER IS CLICKED
       this.childService.subsVar = this.childService.invokeFirstComponentFunction.subscribe((currentPage:number) => { 
         this.currentPage = currentPage;      
-        //console.log("current Page on paging clicked : " + this.currentPage);
         let data  = this.parameter(this.currentPage, this.status, this.keyword, this.orderKey, this.orderType);
-        this.onLoad(data);
-        // this.service.getCategoryList(data)
-        // .subscribe(result=>
-        // { 
-        //     this.categories = dataFilter(result[keyword.categoryList][keyword.listKeyword]);
-        //     return result
-        // });
-
+        this.onLoad(data);       
       });    
     }
   }
   submitSearch():void{
     let data  = this.parameter(this.currentPage=1, this.status, this.keyword, this.orderKey, this.orderType);
-    this.service.getCategoryList(data)
-        .subscribe(result=>
+    this.service.getAllList(data)
+        .subscribe(results=>
         { 
-            this.categories = dataFilter(result[keyword.categoryList][keyword.listKeyword]);
-            this.currentPage = result[keyword.categoryList][keyword.pageInfo][keyword.currentPage];            
-            this.totalPageNumber =result[keyword.categoryList][keyword.pageInfo][keyword.totalPage];
-            this.childService.loadNewPage(this.totalPageNumber);
+          var result  = results[keyword.courseList];
+          var pageInfo = result[keyword.pageInfo];
+          this.courses = dataFilter(result[keyword.listKeyword]);
+          this.currentPage = pageInfo[keyword.currentPage];            
+          this.totalPageList = pageInfo[keyword.totalRecords];
+          this.totalPageNumber =pageInfo[keyword.totalPage];
+          this.childService.loadNewPage(this.totalPageNumber);
             return result
         });
   }
@@ -90,9 +80,7 @@ export class CategoryListComponent implements OnInit, OnDestroy  {
     });
 
   }
-  ngOnDestroy():void {
-    this.querySubscription.unsubscribe();
-  }
+
 
   parameter(currentPage,status, keyword, orderKey, orderType){
     let data = {

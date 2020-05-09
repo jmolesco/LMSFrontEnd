@@ -468,6 +468,11 @@ h6 {
   background-color: #ffffff;
   border-color: #efefef;
 }
+.btn-default {
+  color: #444444;
+  background-color: #efefef;
+  border-color: #efefef;
+}
 .btn-white:hover,
 .btn-white:focus,
 .btn-white.focus,
