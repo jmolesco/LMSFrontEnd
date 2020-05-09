@@ -61,7 +61,13 @@ export class BaseService {
             variables: variables,
           })
           .valueChanges
-              .pipe(map(result => result.data));           
+              .pipe(
+                map(result => result.data),
+                catchError(err=> {
+                  console.log(err);
+                  return err;
+                })
+                );           
   }
 
   public submitActionMutation(mutation?:any, variables?:any, refreshQueries?:any, refreshVar?:any){
@@ -72,6 +78,7 @@ export class BaseService {
         query:refreshQueries,
         variables:refreshVar
       }],
+      errorPolicy: 'all'
     });           
   }
 

@@ -30,7 +30,7 @@ export const categoryList = gql`
         }
         `;
 export const categoryDetail = gql`
-        query GetCategoryDetail($id: Int)
+        query GetCategoryDetail($id: Int!)
         {
             GetCategoryDetail(id: $id)
             {
@@ -48,3 +48,13 @@ export const submitDeleteAction = gql`
             deleteCategory(categoryDeleteInput:$categoryDeleteInput)
         }
     `;
+export const submitInsertAction = gql `
+        mutation createCategory($categoryInput:CategoryInput!){
+            createCategory(categoryInput:$categoryInput)
+        }
+    `;
+export const submitEditAction = gql `
+    mutation updateCategory($categoryUpdateInput:CategoryUpdateInput!){
+        updateCategory(categoryUpdateInput:$categoryUpdateInput)
+    }
+`;

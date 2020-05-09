@@ -1,29 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CategoryService } from '../category.service';
+import { CourseService } from '../course.service';
+import { CategoryService } from '../../category/category.service';
 import {constantKeywords as keyword} from '@sharedHelper/constantKeywords';
 import { ErrorService } from '@sharedService/error.service';
 import {processError} from '@sharedHelper/helperFunction';
 @Component({
-  selector: 'app-category-detail',
-  templateUrl: './category-detail.component.html',
-  styleUrls: ['./category-detail.component.sass']
+  selector: 'app-course-detail',
+  templateUrl: './course-detail.component.html',
+  styleUrls: ['./course-detail.component.sass']
 })
-export class CategoryDetailComponent implements OnInit {
+export class CourseDetailComponent implements OnInit {
 
   id:number = 0;
   name: string;
+  description:string;
+  photo:string;
+  categoryId:number=0;
+  createdBy:number = 0;
+  updatedBy:number = 0;
+  categoryList;
+
   functionState:boolean = false;
   functionUsed:string;
   actionType:string=keyword.actionInsert;
-  // componentVariables: object{
-  //   scategory_name:"This is an error",
-  //   ncategory_id:""
-  // }
-  scategory_name_err:string;
   constructor(private route:ActivatedRoute,
-    private service:CategoryService,
-    private errorService:ErrorService
+    private service:CourseService,
+    private errorService:ErrorService,
+    private categoryService:CategoryService
     ) {
 
       if(this.errorService.errorVar !== undefined){
@@ -36,26 +40,27 @@ export class CategoryDetailComponent implements OnInit {
       const id = params['id'];
       if(id!=="new"){
         this.functionState = true;
-        this.service.getCategoryDetail({id}).subscribe(result=>{
-          console.log(result);
-            const detailContent = result[keyword.GetCategoryDetail];
-            this.name = detailContent[keyword.scategory_name];
-            this.id = detailContent[keyword.ncategory_id];
+        this.service.getDetail({id}).subscribe(result=>{
+            const detailContent = result[keyword.GetCourseDetail];
+            
+            this.id = detailContent.ncourse_id;
+            this.categoryId = detailContent.ncategory_id;
+            this.description= detailContent.scourse_description;
+            this.name = detailContent.scourse_title;
 
             this.functionUsed =keyword.recordEdited;
             this.actionType = keyword.actionEdit;
         });     
      }
     });
-
+    this.loadCategory()
     if (this.errorService.errorVar===undefined) 
     {    
         //THIS FUNCTION IS USED WHEN ERROR IN APP MODULE HAS ERROR
         this.errorService.errorVar = this.errorService.invokeErrorComponentFunction.subscribe((obj) => {
            const error =  processError(obj);
            console.log(error);
-           this.scategory_name_err = error["scategory_name_err"];
-           console.log(this.scategory_name_err);
+          
         });    
     }
     
@@ -63,8 +68,14 @@ export class CategoryDetailComponent implements OnInit {
   
   getInputData():any{
     const data = {
-      id:this.id,
-      name:this.name.trim()
+      ncourse_id:this.id,
+      scourse_title:this.name.trim(),
+      scourse_description:this.description.trim(),
+      ncategory_id:this.categoryId,
+      ncreated_by:1,
+      scourse_photo:"",
+      nupdated_by:0
+
     }
     return data;
   }
@@ -74,6 +85,7 @@ export class CategoryDetailComponent implements OnInit {
   }
   submitInsertRecord():void{
     const dataAdd = this.getInputData();
+    console.log(dataAdd);
     this.service.submitActionMutation(dataAdd).subscribe(
       success => { 
            this.clearInput();
@@ -94,7 +106,21 @@ export class CategoryDetailComponent implements OnInit {
         console.log(error); 
       } 
     );
+  
   }
 
+  loadCategory():void{
+    let data = {
+      pageNumber:0,
+      status:0,
+      keyword:"",
+      orderKey:0,
+      orderType:0 
+    };
+    this.categoryService.getCategoryList(data).subscribe(result=>{
+      console.log(result);
+        this.categoryList = result[keyword.categoryList][keyword.listKeyword];
+    });     
+  }
 
 }

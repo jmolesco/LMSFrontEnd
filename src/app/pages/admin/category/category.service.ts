@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BaseService} from '@sharedService/base.service';
-import {categoryList, submitDeleteAction} from '@sharedHelper/graphql'
+import {categoryList, submitDeleteAction,categoryDetail, submitInsertAction,submitEditAction } from '@sharedHelper/graphql'
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +44,36 @@ export class CategoryService {
       orderBy:{ orderKey:parseInt(refreshVar.orderKey), orderType:parseInt(refreshVar.orderType)}
     };
     return this.baseService.submitActionMutation(submitDeleteAction, variables, categoryList, refreshVariables);
+  }
+  public submitActionMutation(data, isEdit=false){
+    var action = submitInsertAction;
+    let inputData;
+    if(isEdit === true){
+      const variables = {
+        categoryUpdateInput:{
+          ncategory_id:data.id,
+          scategory_name:data.name
+        }
+      };
+      inputData= variables;
+      action = submitEditAction;
+    }
+    else{
+      const variables = {
+        categoryInput:{
+          scategory_name:data.name
+        }
+      };
+      
+      inputData= variables;
+    }
+    return this.baseService.submitActionMutation(action, inputData);
+  }
+  public getCategoryDetail(data){
+    const variables = { 
+      id:parseInt(data.id)
+    };
+    return this.baseService.getResponseAllQuery(categoryDetail, variables);  
   }
 
 }

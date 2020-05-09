@@ -10,3 +10,5 @@ import {AdminModule} from './admin/admin.module';
   ]
 })
 export class PagesModule { }
+export * from './admin/category/category.module';
+export * from './admin/course/course.module';
