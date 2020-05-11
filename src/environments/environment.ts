@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  url:"http://localhost:13003/graphql"
+  url:"http://localhost:13003/graphql",
+  imageUrl:"http://localhost:13003/images/public/"
 };
 
 /*

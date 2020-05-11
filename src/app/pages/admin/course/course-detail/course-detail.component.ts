@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CourseService } from '../course.service';
 import { CategoryService } from '../../category/category.service';
 import {constantKeywords as keyword} from '@sharedHelper/constantKeywords';
 import { ErrorService } from '@sharedService/error.service';
 import {processError} from '@sharedHelper/helperFunction';
+import {environment} from '@environment/environment';
 @Component({
   selector: 'app-course-detail',
   templateUrl: './course-detail.component.html',
@@ -16,25 +17,34 @@ export class CourseDetailComponent implements OnInit {
   name: string;
   description:string;
   photo:string;
+  photoPath:any;
+  photoData: any = <any>{};
   categoryId:number=0;
   createdBy:number = 0;
   updatedBy:number = 0;
   categoryList;
-
   functionState:boolean = false;
   functionUsed:string;
   actionType:string=keyword.actionInsert;
   constructor(private route:ActivatedRoute,
     private service:CourseService,
     private errorService:ErrorService,
-    private categoryService:CategoryService
+    private categoryService:CategoryService,
     ) {
 
       if(this.errorService.errorVar !== undefined){
         this.errorService.errorVar  = undefined;     
       }
    }
-
+   handleFileInput(file):void{
+     console.log(file);
+    if (file) {
+      this.photoData.file = file[0];
+      const reader = new FileReader();
+      reader.onload = e => this.photoPath = reader.result;
+      reader.readAsDataURL(file[0]);
+  }
+   }
   ngOnInit(): void {
     this.route.params.subscribe(params=>{
       const id = params['id'];
@@ -47,9 +57,9 @@ export class CourseDetailComponent implements OnInit {
             this.categoryId = detailContent.ncategory_id;
             this.description= detailContent.scourse_description;
             this.name = detailContent.scourse_title;
-
             this.functionUsed =keyword.recordEdited;
             this.actionType = keyword.actionEdit;
+            this.photoPath = environment.imageUrl + detailContent.scourse_photo;
         });     
      }
     });
@@ -73,9 +83,9 @@ export class CourseDetailComponent implements OnInit {
       scourse_description:this.description.trim(),
       ncategory_id:this.categoryId,
       ncreated_by:1,
-      scourse_photo:"",
-      nupdated_by:0
-
+      scourse_photo:this.photo,
+      nupdated_by:0,
+      image:this.photoData.file
     }
     return data;
   }
@@ -118,7 +128,6 @@ export class CourseDetailComponent implements OnInit {
       orderType:0 
     };
     this.categoryService.getCategoryList(data).subscribe(result=>{
-      console.log(result);
         this.categoryList = result[keyword.categoryList][keyword.listKeyword];
     });     
   }

@@ -1,36 +1,42 @@
-<div class="st-container">
+<!-- <div class="st-container">
     <app-header></app-header>
     <app-sidebar></app-sidebar>
-        <!-- content push wrapper -->
+       
         <div class="st-pusher" id="content">
 
-            <!-- sidebar effects INSIDE of st-pusher: -->
-            <!-- st-effect-3, st-effect-6, st-effect-7, st-effect-8, st-effect-14 -->
+           
       
-            <!-- this is the wrapper for the content -->
+           
             <div class="st-content">
       
-              <!-- extra div for emulating position:fixed of the menu -->
+             
               <div class="st-content-inner padding-none">
       
                 <div class="container-fluid">
       
                   <div class="page-section third">
-                    <!-- Tabbable Widget -->
+                   
                     <router-outlet></router-outlet>
-                      <!-- // END Tabbable Widget -->
+                   
       
                   </div>
       
                 </div>
       
               </div>
-              <!-- /st-content-inner -->
+             
       
             </div>
-            <!-- /st-content -->
+            
       
           </div>
 
-</div>
+</div> -->
 
+<div class="body login breakpoint-1024">
+    <!-- <app-login></app-login> -->
+    <router-outlet></router-outlet>
+</div>
+<footer class="footer">
+  <strong>Learning</strong> v1.1.0 &copy; Copyright 2015
+</footer>

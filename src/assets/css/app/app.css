@@ -1,10 +1,18 @@
 @import url('http://fonts.googleapis.com/css?family=RobotoDraft:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en');
-body.login {
+/* .margin-v-5-percent{
+  margin-top: 10% !important;
+  margin-bottom: 10% !important;
+} */
+.opacity
+{
+  opacity:90%;
+}
+.body.login {
   position: initial;
   background: #f5f5f5;
   padding-top: 0;
 }
-body.login #content {
+.body.login #content {
   max-width: 760px;
   margin: auto;
   position: absolute;
@@ -13,29 +21,29 @@ body.login #content {
   bottom: 0;
   right: 0;
 }
-body.login .lock-container {
+.body.login .lock-container {
   margin: auto;
-  width: 300px;
+  width: 450px;
 }
 @media (min-width: 480px) {
-  body.login .lock-container {
+  .body.login .lock-container {
     bottom: 0;
-    height: 550px;
+    height: 600px;
     left: 0;
     position: absolute;
     top: 0;
     right: 0;
   }
 }
-body.login .lock-container .panel {
-  max-width: 300px !important;
+.body.login .lock-container .panel {
+  max-width: 450px !important;
   background: #fff;
   position: relative;
 }
 body.login .lock-container .panel img {
   margin: 20px 0 10px;
 }
-body.login .lock-container .panel .forgot-password {
+.body.login .lock-container .panel .forgot-password {
   margin: 10px 0 0;
   font-weight: 500;
   color: #42a5f5;
@@ -35278,10 +35286,10 @@ fieldset[disabled] .btn-yellow-A700.btn-stroke.active {
   box-shadow: 0 -3px 5px -3px rgba(0, 0, 0, 0.15);
   z-index: 101;
 }
-.ls-bottom-footer body {
+.ls-bottom-footer .body {
   padding-bottom: 65px;
 }
-.bottom-footer body {
+.bottom-footer .body {
   padding-bottom: 45px;
 }
 html.app-mobile {
@@ -36501,6 +36509,7 @@ fieldset[disabled] .navbar-primary .btn-primary.active {
   }
 }
 @media (min-width: 768px) {
+
   .show-sidebar.sidebar-l1 #content {
     margin-left: 56px;
   }
@@ -36509,6 +36518,9 @@ fieldset[disabled] .navbar-primary .btn-primary.active {
   }
   .show-sidebar.sidebar-l3 #content {
     margin-left: 250px;
+  }
+  .body.login #content {
+    margin: auto;
   }
   .show-sidebar.sidebar-l-25pc #content {
     margin-left: 25%;

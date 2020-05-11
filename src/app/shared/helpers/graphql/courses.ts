@@ -20,7 +20,7 @@ query GetCourseList(
                 nupdated_by,
                 intime,
                 uptime,
-                status
+                status,
               }
               pageInfo{
                 totalPage
@@ -36,17 +36,17 @@ query
     {
         GetCourseDetail(id: $id)
         {
-        ncourse_id
-        scourse_title
-        scourse_description
-        scourse_photo
-        ncategory_id
-        scategory_name
-        ncreated_by
-        nupdated_by
-        intime
-        uptime
-        status
+            ncourse_id,
+            scourse_title,
+            scourse_description,
+            scourse_photo,
+            ncategory_id,
+            scategory_name,
+            ncreated_by,
+            nupdated_by,
+            intime,
+            uptime,
+            status,
         }
     }
 `;
@@ -58,7 +58,7 @@ mutation ($courseDeleteInput:CourseDeleteInput!)
 `;
 export const submitCourseInsertAction = gql `
         mutation createCourse($courseInput:CourseInput!){
-            createCourse(categoryInput:$courseInput)
+            createCourse(courseInput:$courseInput)
         }
     `;
 export const submitCourseEditAction = gql `

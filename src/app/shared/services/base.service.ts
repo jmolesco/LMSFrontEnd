@@ -81,6 +81,23 @@ export class BaseService {
       errorPolicy: 'all'
     });           
   }
+  public SubmitWithUploadImage(mutation?:any, variables?:any){
+    return this.apollo.mutate({
+      mutation:mutation,
+      variables: variables,
+      context: {
+        useMultipart: true
+      },
+      errorPolicy: 'all'
+    });           
+  }
+  public SubmitNoRefreshAction(mutation?:any, variables?:any){
+    return this.apollo.mutate({
+      mutation:mutation,
+      variables: variables,
+      errorPolicy: 'all'
+    });        
+  }
 
   handleError(error: HttpErrorResponse){
     console.log(error);

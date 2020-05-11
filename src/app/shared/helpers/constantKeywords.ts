@@ -13,7 +13,7 @@ export const constantKeywords = {
     recordAdded         : "added",
     recordEdited        : "updated",
     recordDeleted       : "deleted",
-    delayTime           : 2300,
+    delayTime           : 5000,
     actionInsert        : "New",
     actionEdit          : "Edit",
     courseList          : "GetCourseList",

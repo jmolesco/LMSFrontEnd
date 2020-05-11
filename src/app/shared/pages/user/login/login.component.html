@@ -1,0 +1,76 @@
+<div id="content">
+    <div class="container-fluid">
+
+        <div class="lock-container">
+            <div class="panel panel-default text-center paper-shadow" data-z="0.5">
+                <div class="panel-heading">
+                    <h2 class="text-display-1">Sign In</h2>
+                </div>
+                <div class="alert alert-danger opacity" role="alert" *ngIf="success">
+                  {{varNames.account}}
+                 </div>
+                <div class="panel-body">
+                    
+                    <form (ngSubmit)="submitLogIn()" #detailForm="ngForm">
+                        <div class="form-group">
+                          <label for="inputEmail3" class="col-md-12 control-label">UserName</label>
+                          <div class="col-md-12">
+                            <div class="row">
+                              <div class="col-md-12">
+                                <input class="input form-control" type="text" placeholder="UserName" [(ngModel)]="userName" name="userName"
+                                  >
+                              </div>
+            
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="inputEmail3" class="col-md-12 control-label">Password</label>
+                          <div class="col-md-12">
+                            <div class="row">
+                              <div class="col-md-12">
+                                <input class="input form-control" type="text" placeholder="Password" 
+                                [(ngModel)]="password" #nameInput="ngModel" name="password" required />
+                                  <p class="help btn-danger">
+                             
+                                  </p>
+                              </div>
+            
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12 text-center">
+                              <button type="submit" class="btn btn-primary paper-shadow relative width-200" data-z="0.5" data-hover-z="1"
+                                data-animated [disabled]="detailForm.invalid">Log in</button>&nbsp;
+                            </div>
+                            <div class="col-md-12 text-center">&nbsp;</div>
+                            <div class="col-md-12 text-center">
+                                <a routerLink="/user/register">Create your account </a>
+                            </div>
+                    
+                        </div>
+                      </form>
+                    <!-- <div class="form-group">
+                        <div class="form-control-material">
+                            <input class="form-control" id="username" type="text" placeholder="Username">
+                            <label for="username">Username</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-control-material">
+                            <input class="form-control" id="password" type="password" placeholder="Enter Password">
+                            <label for="password">Password</label>
+                        </div>
+                    </div> -->
+
+                    <!-- <a href="website-student-dashboard.html" class="btn btn-primary">Login <i
+                            class="fa fa-fw fa-unlock-alt"></i></a>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                    <a routerLink="/user/register" class="link-text-color">Create account</a> -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

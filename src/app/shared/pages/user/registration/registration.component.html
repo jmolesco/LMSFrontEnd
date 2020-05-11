@@ -1,0 +1,134 @@
+<div id="content">
+    <div class="container-fluid">
+
+        <div class="lock-container" style="height: 750px;">
+            <div class="panel panel-default text-center paper-shadow" data-z="0.5" >
+                <div class="panel-heading">
+                <h2 class="text-display-1">Create account</h2>
+            </div>
+                <div class="alert alert-success opacity" role="alert" *ngIf="success">
+                    Your account has been created. Redirecting to login shortly!
+                </div>
+                <form role="form" (ngSubmit)="createAccount()" #detailForm="ngForm">
+                    <img src="{{photoPath}}" class="img-circle width-120">
+                    <div class="form-group">
+                        <div class="col-md-12 text-center margin-v-5">
+                            <div class="col-md-offset-1 col-md-10">
+                                <input id="photo" type="file" placeholder="Upload Profile Photo"                           
+                                class="form-control" (change)="handleFileInput($event.target.files)">
+                                <p class="help btn-danger">
+                                    {{varNames.nuser_picture}}
+                                  </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group ">
+                            <!-- <label for="inputEmail3" class="col-md-3 control-label">FirstName </label> -->
+                            <div class="col-md-12 margin-v-5">
+                                <input class="input form-control" type="text" placeholder="First Name"
+                                [(ngModel)]="firstName" #firstNameInput="ngModel" name="firstName" required />
+                                <!-- <p class="help btn-danger" *ngIf="firstNameInput.invalid && firstNameInput.touched">
+                                    FirstName is required
+                                  </p> -->
+                                  <p class="help btn-danger">
+                                    {{varNames.nuser_firstname}}
+                                  </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!-- <label for="inputEmail3" class="col-md-3 control-label">LastName</label> -->
+                            <div class="col-md-12 margin-v-5">
+                                <input id="lastName" type="text" class="form-control" placeholder="Last Name"
+                                [(ngModel)]="lastName" #lastNameInput="ngModel" name="lastName" required />
+                                <!-- <p class="help btn-danger" *ngIf="lastNameInput.invalid && lastNameInput.touched">
+                                    LastName is required
+                                  </p> -->
+                                  <p class="help btn-danger">
+                                    {{varNames.nuser_lastname}}
+                                  </p>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <!-- <label for="inputEmail3" class="col-md-3 control-label">E-Address</label> -->
+                            <div class="col-md-12 margin-v-5">
+                                <input id="email" type="email" class="form-control" placeholder="Email"
+                                [(ngModel)]="email" #emailInput="ngModel" name="email" required />
+                                <!-- <p class="help btn-danger" *ngIf="emailInput.invalid && emailInput.touched">
+                                    Email Address is required
+                                  </p> -->
+                                  <p class="help btn-danger">
+                                    {{varNames.nuser_email}}
+                                  </p>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <!-- <label for="inputEmail3" class="col-md-3 control-label">UserName</label> -->
+                            <div class="col-md-12 margin-v-5">
+                                <input id="username" type="text" class="form-control" placeholder="UserName"
+                                [(ngModel)]="userName" #userNameInput="ngModel" name="userName" required />
+                                <!-- <p class="help btn-danger" *ngIf="userNameInput.invalid && userNameInput.touched">
+                                  UserName is required
+                                </p> -->
+                                <p class="help btn-danger">
+                                    {{varNames.nuser_name}}
+                                  </p>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <!-- <label for="inputEmail3" class="col-md-3 control-label">Password</label> -->
+                            <div class="col-md-12 margin-v-5">
+                                <input id="password" type="password" class="form-control" placeholder="Password"
+                                [(ngModel)]="password" #passwordInput="ngModel" name="password" required />
+                                <!-- <p class="help btn-danger" *ngIf="passwordInput.invalid && passwordInput.touched">
+                                    Password is required
+                                  </p> -->
+                                  <p class="help btn-danger">
+                                    {{varNames.nuser_password}}
+                                  </p>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <!-- <label for="inputEmail3" class="col-md-3 control-label">ReType Pass </label> -->
+                            <div class="col-md-12 margin-v-5">
+                                <input id="passwordConfirmation" type="password" class="form-control"
+                                    placeholder="Password Confirmation"
+                                    [(ngModel)]="confirmPass" #confirmPassInput="ngModel" name="confirmPass" required />
+                                    <!-- <p class="help btn-danger" *ngIf="confirmPassInput.invalid && confirmPassInput.touched">
+                                        Confirm Password is required
+                                      </p> -->
+                                      <p class="help btn-danger">
+                                        {{varNames.confirmpass}}
+                                      </p>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row text-center">
+                                <div class="col-md-12 ">
+                                    <button type="submit" class="btn btn-primary paper-shadow relative" data-z="0.5"
+                                        data-hover-z="1" data-animated
+                                        [disabled]="detailForm.invalid"
+                                        
+                                        >
+                                        
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span *ngIf="loading"><i class="fa fa-circle-o-notch fa-spin fa-fw"></i>&nbsp;</span>&nbsp;Create
+                                        Account&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </button>
+
+
+                                </div>
+                                <div class="col-md-12 text-center">&nbsp;</div>
+                                <div class="col-md-12 ">
+                                    <a routerLink="/login">Log In Account</a>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

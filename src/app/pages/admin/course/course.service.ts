@@ -46,6 +46,7 @@ export class CourseService {
           ncategory_id:parseInt(data.ncategory_id),
           ncreated_by:data.ncreated_by,
           nupdated_by:data.nupdated_by,
+          image:data.image
         }
       };
       inputData= variables;
@@ -60,13 +61,13 @@ export class CourseService {
           ncategory_id:parseInt(data.ncategory_id),
           ncreated_by:data.ncreated_by,
           nupdated_by:data.nupdated_by,
+          image:data.image
         }
       };
       
       inputData= variables;
     }
-    console.log(inputData);
-    return this.baseService.submitActionMutation(action, inputData);
+    return this.baseService.SubmitWithUploadImage(action, inputData);
   }
   public getDetail(data){
     const variables = { 
