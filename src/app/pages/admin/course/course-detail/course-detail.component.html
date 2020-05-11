@@ -22,7 +22,7 @@
                         </h4>
                     </div>
                     <div class="media-right media-padding">
-                        <button routerLink="/admin/category" type="button" class="btn btn-primary paper-shadow relative"
+                        <button routerLink="/admin/course" type="button" class="btn btn-primary paper-shadow relative"
                             data-z="0.5" data-hover-z="1" data-animated="">
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-left"
                                 aria-hidden="true"></i>&nbsp;&nbsp;Go
@@ -124,7 +124,9 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <input class="input form-control" type="file" placeholder="Upload Photo"
-                                            [(ngModel)]="photo" #photoInput="ngModel" name="photo" />
+                                            [(ngModel)]="photo" #photoInput="ngModel" name="photo" 
+                                            (change)="handleFileInput($event.target.files)"
+                                            />
                                     </div>
                                     <p class="help btn-danger" *ngIf="photoInput.invalid && photoInput.touched">
                                         Photo is required
@@ -134,7 +136,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-12">
-                                <img src="../../../../../assets/images/people/110/guy-6.jpg" alt="people"  style="width: 100%;"/>
+                                <img src="{{photoPath}}"  style="width: 100%;"/>
                             </div>
                         </div>
                     </div>

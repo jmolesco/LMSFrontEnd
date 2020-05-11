@@ -36,16 +36,20 @@ export class AppModule {
   ) {
     const errorLink = onError(({ graphQLErrors, networkError }) => {
       if (graphQLErrors) {
-        graphQLErrors.map(({ message, locations, path }) =>
-          console.log(
-            `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
-          ),
-        );
-        
-        this.errorService.acceptErrorList(graphQLErrors);
+        // graphQLErrors.map(({ message, locations, path }) =>
+        //   console.log(
+        //     `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+        //   ),
+        // );
+        const errors = graphQLErrors[0];
+    
+        if(errors["statusCode"]===400){
+         this.errorService.acceptErrorList(errors["errorList"]);
+        }
       }
       if (networkError) {
         console.log(`[Network error]: ${networkError}`);
+       
         const errors = networkError["error"]["errors"][0];
         if(errors["statusCode"])
         this.errorService.acceptErrorList(errors.errorList);

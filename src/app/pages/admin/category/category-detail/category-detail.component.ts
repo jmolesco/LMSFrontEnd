@@ -37,7 +37,6 @@ export class CategoryDetailComponent implements OnInit {
       if(id!=="new"){
         this.functionState = true;
         this.service.getCategoryDetail({id}).subscribe(result=>{
-          console.log(result);
             const detailContent = result[keyword.GetCategoryDetail];
             this.name = detailContent[keyword.scategory_name];
             this.id = detailContent[keyword.ncategory_id];
