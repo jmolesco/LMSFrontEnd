@@ -1,9 +1,11 @@
-
+import {environment} from '@environment/environment';
 function dataFilter(data){
     const newData = [];
     Object.keys(data).forEach(key => {
         let value = data[key];
         value.statusName = value.status ===1?"Active":"InActive";
+        value.nuser_picture = environment.imageProfile + value.nuser_picture;
+        value.ndefault_pageview_name = value.ndefault_pageview===1?"User":value.ndefault_pageview===2?"Parent":"Admin";
         newData.push(value);
       });
     return newData;

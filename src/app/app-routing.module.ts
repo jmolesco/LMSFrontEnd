@@ -20,6 +20,14 @@ const routes: Routes = [
     path:"admin/course",
     loadChildren:()=> import("./pages/pages.module").then(m=>m.CourseModule),
   },
+  {
+    path:"admin/category",
+    loadChildren:()=> import("./pages/pages.module").then(m=>m.CategoryModule),
+  },
+  {
+    path:"admin/user",
+    loadChildren:()=> import("./pages/pages.module").then(m=>m.UserModule),
+  },
 ];
 
 @NgModule({

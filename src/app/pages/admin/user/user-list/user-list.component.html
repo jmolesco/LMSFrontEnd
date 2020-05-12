@@ -1,7 +1,7 @@
 <ol class="breadcrumb">
     <li><a routerLink="/">Dashboard</a></li>
-    <li><a routerLink="/admin/course">Course Management</a></li>
-    <li class="active">Course List</li>
+    <li><a routerLink="/admin/user">User Management</a></li>
+    <li class="active">User List</li>
   </ol>
   <div class="row">
     <div class="col-xs-12 col-lg-12">
@@ -17,7 +17,7 @@
             </div>
             <div class="media-body">
               <h4 class="text-headline">
-                List of Courses
+                List of Users
               </h4>
             </div>
             <div class="media-right media-padding">
@@ -34,10 +34,10 @@
   
             <thead>
               <tr>
-                <th colspan="2" class="text-center">
+                <th class="text-center">
                   <div class="input-group input-group form-control">
                     <div class="input-group-prepend">
-                      <label class="input-group-text" for="inputGroupSelect01">Filter By</label>
+                      <label class="input-group-text" for="inputGroupSelect01">Filter By Status</label>
                     </div>
                     <select class="select input-group-sm form-control" id="inputGroupSelect01" [(ngModel)]="status"
                       (change)="submitSearch()">
@@ -47,7 +47,20 @@
                     </select>
                   </div>
                 </th>
-                <th colspan="2" class="text-center">
+                <th class="text-center">
+                    <div class="input-group input-group form-control">
+                      <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Filter By Role</label>
+                      </div>
+                      <select class="select input-group-sm form-control" id="inputGroupSelect01" [(ngModel)]="role"
+                        (change)="submitSearch()">
+                        <option value="0">All</option>
+                        <option value="2">Admin</option>
+                        <option value="1">User</option>
+                      </select>
+                    </div>
+                  </th>
+                <th class="text-center" colspan="2">
                   <div class="input-group input-group form-control">
                     <div class="input-group-prepend">
                       <label class="input-group-text" for="inputGroupSelect01">Order By</label>
@@ -56,15 +69,17 @@
                       (change)="submitSearch()">
                       <option value="0">Choose</option>
                       <option value="1">ID</option>
-                      <option value="2">Name</option>
-                      <option value="2">Category</option>
+                      <option value="2">Full Name</option>
+                      <option value="3">Email Address</option>
+                      <option value="4">Username</option>
+                      
                     </select>
                   </div>
                 </th>
-                <th colspan="2" class="text-center">
+                <th class="text-center" >
                   <div class="input-group input-group form-control">
                     <div class="input-group-prepend">
-                      <label class="input-group-text" for="inputGroupSelect01">Order By</label>
+                      <label class="input-group-text" for="inputGroupSelect01">Order Type</label>
                     </div>
                     <select class="select input-group-sm form-control" id="inputGroupSelect01" [(ngModel)]="orderType"
                       (change)="submitSearch()">
@@ -74,13 +89,13 @@
                     </select>
                   </div>
                 </th>
-                <th colspan="2" class="text-center">
+                <th class="text-center" colspan="3">
                   <div class="input-group input-group form-control">
                     <div class="input-group-prepend">
                       <label class="input-group-text" for="inputGroupSelect01">Search Any Keyword</label>
                     </div>
                     <input type="text" class="input-group-sm form-control" (keyup)="submitSearch()" type="text"
-                      placeholder="Search Course Name" [(ngModel)]="keyword">
+                      placeholder="Search Users" [(ngModel)]="keyword">
                   </div>
                 </th>
               </tr>
@@ -88,60 +103,63 @@
             <thead>
               <tr>
                 <th scope="col" class="text-center">#</th>
-                <th scope="col" class="text-center">Course Name</th>
-                <th scope="col" class="text-center">Description</th>
-                <th scope="col" class="text-center">Category</th>
-                <th scope="col" class="text-center">Created By</th>
-                <th scope="col" class="text-center">Updated By</th>
+                <th scope="col" class="text-center">Photo</th>
+                <th scope="col" class="text-center">Full Name</th>
+                <th scope="col" class="text-center">Group</th>
+                <th scope="col" class="text-center">Email Address</th>
+                <th scope="col" class="text-center">Username</th>
                 <th scope="col" class="text-center">Status</th>
                 <th scope="col" class="text-center">Action</th>
-              </tr>
+            </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let course of courses; index as i">
-                <th scope="row" class="text-center">{{ course.ncourse_id }}</th>
+              <tr *ngFor="let user of userList; index as i">
+                <th scope="row" class="text-center">{{ user.nuser_id }}</th>
                 <td class="text-center">
-                  {{ course.scourse_title }}
+                  <img src="{{user.nuser_picture}}" alt = "{{user.nfull_name}}" 
+                    data-toggle="tooltip"
+                    data-delay='{"show":"500", "hide":"100"}'
+                    data-placement="right" 
+                    title="{{user.nfull_name}}"
+                  class="img-circle" width="40" />
                 </td>
                 <td class="text-center">
-                    {{ course.scourse_description }}
+                  {{ user.nfull_name }}
                 </td>
                 <td class="text-center">
-                    {{ course.scategory_name }}
+                  {{ user.ndefault_pageview_name }}
                 </td>
                 <td class="text-center">
-                    {{ course.ncreated_by }}
+                  {{ user.nuser_email }}
                 </td>
                 <td class="text-center">
-                    {{ course.nupdated_by }}
-                </td>
+                  {{ user.nuser_name }}
+                </td>                
                 <td class="text-center">
                   <span
-                    [ngClass]="['badge',(course.status===1)===true?'btn-success':'btn-danger']">
-                    <span [ngClass]="[(course.status===1)===true?'invisible':'hidden']">.</span>
-                    {{ course.statusName }}
-                    <span [ngClass]="[(course.status===1)===true?'invisible':'hidden']">.</span>
+                    [ngClass]="['badge',(user.status===1)===true?'btn-success':'btn-danger']">
+                    <span [ngClass]="[(user.status===1)===true?'invisible':'hidden']">.</span>
+                    {{ user.statusName }}
+                    <span [ngClass]="[(user.status===1)===true?'invisible':'hidden']">.</span>
                   </span>
+  
+  
                 </td>
                 <td class="text-center">
-                  <button type="button" routerLink="{{course.ncourse_id}}" class="btn btn-primary" data-toggle="tooltip" data-placement="right"
-                    title="Edit record # {{course.ncourse_id}}"
-                    data-delay='{"show":"500", "hide":"100"}'
-                    >
+                  <button type="button" routerLink="{{user.nuser_id}}" class="btn btn-primary" data-toggle="tooltip" data-placement="right"
+                    title="View record # {{user.nuser_id}}">
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                   </button>&nbsp;&nbsp;
-                  <button type="button" (click)="submitUpdateStatus(course.ncourse_id, 0)" data-toggle="tooltip"
+                  <button type="button" (click)="submitUpdateStatus(user.nuser_id, 0)" data-toggle="tooltip"
                     data-delay='{"show":"500", "hide":"100"}'
-                    data-placement="right" title="Deactivate record # {{course.ncourse_id}}"
-                    [ngClass]="['btn btn-danger',(course.status===1)===true?'':'hide']"><i class="fa fa-ban"
+                    data-placement="right" title="Deactivate record # {{user.nuser_id}}"
+                    [ngClass]="['btn btn-danger',(user.status===1)===true?'':'hide']"><i class="fa fa-ban"
                       aria-hidden="true"></i>
                   </button>
-                  <button type="button" (click)="submitUpdateStatus(course.ncourse_id, 1)" data-toggle="tooltip"
-                    data-placement="right" title="Activate record # {{course.ncourse_id}}"
-                    [ngClass]="['btn btn-success',(course.status===1)===true?'hide':'']"><i class="fa fa-plus-circle"
-                      aria-hidden="true"
-                      data-delay='{"show":"500", "hide":"100"}'
-                      ></i>
+                  <button type="button" (click)="submitUpdateStatus(user.nuser_id, 1)" data-toggle="tooltip"
+                    data-placement="right" title="Activate record # {{user.nuser_id}}"
+                    [ngClass]="['btn btn-success',(user.status===1)===true?'hide':'']"><i class="fa fa-plus-circle"
+                      aria-hidden="true"></i>
                   </button>
                 </td>
   
@@ -149,7 +167,7 @@
   
               <tr>
                 <td class="text-center" colspan="8">
-                  <app-pagination *ngIf="totalPageList" [paginationTotal]="totalPageList"
+                  <app-pagination *ngIf="totalPageList > 0" [paginationTotal]="totalPageList"
                     [paginationTotaPage]="totalPageNumber"></app-pagination>
                 </td>
               </tr>

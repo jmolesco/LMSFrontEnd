@@ -16,6 +16,9 @@ export const constantKeywords = {
     delayTime           : 5000,
     actionInsert        : "New",
     actionEdit          : "Edit",
+    actionView          : "View",
     courseList          : "GetCourseList",
-    GetCourseDetail        : "GetCourseDetail",
+    GetCourseDetail     : "GetCourseDetail",
+    GetUserList         : "GetUserList",
+    GetUserDetail       : "GetUserDetail"
 };
