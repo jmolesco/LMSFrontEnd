@@ -20,5 +20,6 @@ export const constantKeywords = {
     courseList          : "GetCourseList",
     GetCourseDetail     : "GetCourseDetail",
     GetUserList         : "GetUserList",
-    GetUserDetail       : "GetUserDetail"
+    GetUserDetail       : "GetUserDetail",
+    logInUser           : "logInUser"
 };

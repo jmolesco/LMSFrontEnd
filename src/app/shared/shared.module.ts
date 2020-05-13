@@ -4,14 +4,12 @@ import { HeaderComponent } from '@sharedPagesAdmin/header/header.component';
 import { SidebarComponent } from '@sharedPagesAdmin/sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { PaginationComponent } from './pages/admin/pagination/pagination.component';
-import { LoginComponent } from './pages/user/login/login.component';
-import { RegistrationComponent } from './pages/user/registration/registration.component';
 import {FormsModule} from '@angular/forms';
 import { HeaderUserComponent } from './pages/user/header-user/header-user.component';
 
 @NgModule({
-  declarations: [HeaderComponent, SidebarComponent, PaginationComponent, LoginComponent, RegistrationComponent, HeaderUserComponent],
-  exports:[HeaderComponent, SidebarComponent, PaginationComponent, LoginComponent, RegistrationComponent, HeaderUserComponent],
+  declarations: [HeaderComponent, SidebarComponent, PaginationComponent,  HeaderUserComponent],
+  exports:[HeaderComponent, SidebarComponent, PaginationComponent,   HeaderUserComponent],
   imports: [
     CommonModule,
     RouterModule,

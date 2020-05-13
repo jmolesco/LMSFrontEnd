@@ -74,6 +74,7 @@ mutation logInUser($userLogInInput:UserLogInParameter!){
     fullName
     userName
     id
+    ndefault_pageview
   }
 }
 `;

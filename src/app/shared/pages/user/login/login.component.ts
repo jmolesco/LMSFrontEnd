@@ -19,10 +19,24 @@ export class LoginComponent implements OnInit {
   }
   constructor(private errorService:ErrorService,
     private service:UserService,
-    private router: Router,) { 
+    private router: Router,) 
+    { 
+      
+      if (this.service.currentUserValue) 
+      {
+          const record = this.service.currentUserValue;
+          if(record.ndefault_pageview===3){ 
+            this.router.navigate(['/admin/dashboard']);
+          }
+          else if(record.ndefault_pageview===1) {
+            this.router.navigate(['/user/dashboard']);
+          }          
+      }
+
       if(this.errorService.errorVar !== undefined){
         this.errorService.errorVar  = undefined;     
       }
+
     }
 
   ngOnInit(): void {
@@ -61,8 +75,13 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.service.submitLogInActionMutation(dataAdd).subscribe(
       success => { 
-           this.functionDelay(keyword.delayTime);
-           console.log(success);
+          this.functionDelay(keyword.delayTime);
+          if(success.data[keyword.logInUser]){
+            const data = success.data[keyword.logInUser];
+            localStorage.setItem('currentUser', JSON.stringify(success.data[keyword.logInUser]));
+            if(data.ndefault_pageview===3) window.location.href = "/admin/dashboard";
+            else if(data.ndefault_pageview===1) window.location.href = "/user/dashboard";
+          }
       },
       error =>  { 
         console.log(error) 

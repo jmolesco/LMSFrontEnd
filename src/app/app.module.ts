@@ -11,11 +11,12 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { onError } from 'apollo-link-error';
 import { environment } from '@environment/environment';
 import {ErrorService} from '@sharedService/error.service';
-
-
+import { LoginComponent } from '@sharedPagesUser/login/login.component';
+import { RegistrationComponent } from '@sharedPagesUser/registration/registration.component';
+import { FormsModule} from '@angular/forms';
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent,LoginComponent,RegistrationComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +24,8 @@ import {ErrorService} from '@sharedService/error.service';
     HttpClientModule,
     SharedModule,
     ApolloModule,
-    HttpLinkModule
+    HttpLinkModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

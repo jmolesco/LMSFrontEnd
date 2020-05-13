@@ -42,12 +42,12 @@
               <ul class="dropdown-menu" role="menu">
                 <li><a href="website-student-courses.html"><i class="fa fa-mortar-board"></i> Account</a></li>
                 <li><a href="website-student-profile.html"><i class="fa fa-user"></i> Profile</a></li>
-                <li><a href="login.html"><i class="fa fa-sign-out"></i> Logout</a></li>
+                <li><a  (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a></li>
               </ul>
             </li>
             <!-- // END user -->
           </ul>
-          <a href="login.html" class="navbar-btn btn btn-primary">&nbsp;<i class="fa fa-sign-out"></i> &nbsp;Log Out&nbsp;&nbsp;</a>
+          <a (click)="logout()" class="navbar-btn btn btn-primary">&nbsp;<i class="fa fa-sign-out"></i> &nbsp;Log Out&nbsp;&nbsp;</a>
         </div>
       </div>
       <!-- /.navbar-collapse -->
