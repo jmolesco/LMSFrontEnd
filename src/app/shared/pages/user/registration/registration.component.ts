@@ -15,6 +15,17 @@ export class RegistrationComponent implements OnInit {
       private service:UserService,
       private router: Router,
     ) { 
+
+    if (this.service.currentUserValue) 
+    {
+      const record = this.service.currentUserValue;
+      if(record.ndefault_pageview===3){ 
+        this.router.navigate(['/admin/dashboard']);
+      }
+      else if(record.ndefault_pageview===1) {
+        this.router.navigate(['/user/dashboard']);
+      }            
+    }  
     if(this.errorService.errorVar !== undefined){
       this.errorService.errorVar  = undefined;     
     }

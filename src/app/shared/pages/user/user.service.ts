@@ -1,15 +1,25 @@
 import { Injectable } from '@angular/core';
 import {BaseService} from '@sharedService/base.service';
 import {submitUserInsertAction, submitUserLogInAction, getUserList,submitUserDeleteAction, getUserDetail} from '@sharedHelper/graphql'
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
+  // INTERCEPTOR VALUES
+  private currentUserSubject: BehaviorSubject<any>;
+  public currentUser: Observable<any>;
+
   constructor(private baseService: BaseService) { 
+    this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
+    this.currentUser = this.currentUserSubject.asObservable();
+  }
 
-
+  public get currentUserValue():any {
+ 
+    return this.currentUserSubject.value;
   }
 
   public getUserList(data){
@@ -94,5 +104,10 @@ export class UserService {
       id:parseInt(data.id)
     };
     return this.baseService.getResponseAllQuery(getUserDetail, variables);  
+  }
+
+  public UserAndAdminLogOut(){
+    localStorage.removeItem('currentUser');
+    this.currentUserSubject.next(null);
   }
 }

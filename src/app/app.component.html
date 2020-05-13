@@ -1,44 +1,38 @@
-<!-- <div class="st-container">
-    <app-header></app-header>
-    <app-sidebar></app-sidebar>
-       
-        <div class="st-pusher" id="content">
-
-           
-      
-           
-            <div class="st-content">
-      
-             
-              <div class="st-content-inner padding-none">
-      
-                <div class="container-fluid">
-      
-                  <div class="page-section third">
-                   
-                    <router-outlet></router-outlet>
-                   
-      
-                  </div>
-      
-                </div>
-      
+<ng-template [ngIf]="isLogIn" [ngIfElse]="loginForm">
+  <ng-template [ngIf]="isAdmin" [ngIfElse]="UserForm">
+    <div class="st-container">
+      <app-header></app-header>
+      <app-sidebar></app-sidebar>
+      <div class="st-pusher" id="content">
+        <div class="st-content">
+          <div class="st-content-inner padding-none">
+            <div class="container-fluid">
+              <div class="page-section third">
+                <router-outlet></router-outlet>
               </div>
-             
-      
             </div>
-            
-      
           </div>
-
-</div> -->
-
-<app-header-user></app-header-user>
-
-<!-- <div class="body login breakpoint-1024">
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #UserForm>
+    <app-header-user></app-header-user>
+    <div class="container">
+      <div class="page-section">
+        <div class="row">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</ng-template>
+<ng-template #loginForm>
+  <div class="body login breakpoint-1024">
     <router-outlet></router-outlet>
-</div> -->
+  </div>
+</ng-template>
 
 <footer class="footer">
-  <strong>Learning</strong> v1.1.0 &copy; Copyright 2015
+  <strong>Learning</strong> v1.1.0 &copy; Copyright 2020
 </footer>
