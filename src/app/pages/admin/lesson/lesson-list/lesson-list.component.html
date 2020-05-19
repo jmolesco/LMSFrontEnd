@@ -1,0 +1,181 @@
+<ol class="breadcrumb">
+    <li><a routerLink="/">Dashboard</a></li>
+    <li><a routerLink="/admin/lesson">Lesson Management</a></li>
+    <li class="active">Lesson List</li>
+  </ol>
+  <div class="row">
+    <div class="col-xs-12 col-lg-12">
+      <div class="panel panel-default paper-shadow">
+        <div class="panel-heading">
+          <div class="media v-middle">
+            <div class="media-left">
+              <div class="bg-light-blue-300 text-white">
+                <div class="panel-body">
+                  <i class="fa fa-bars fa-fw fa-2x"></i>
+                </div>
+              </div>
+            </div>
+            <div class="media-body">
+              <h4 class="text-headline">
+                List of Lessons
+              </h4>
+            </div>
+            <div class="media-right media-padding">
+              <button routerLink="new" type="button" class="btn btn-primary paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated=""
+                title="Add New Record">
+                <i class="fa fa-plus-circle" aria-hidden="true"></i> &nbsp;Add New Record
+              </button>
+       
+            </div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <table class="table table-hover">
+  
+            <thead>
+              <tr>
+                <th colspan="1" class="text-center">
+                  <div class="input-group input-group form-control">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="inputGroupSelect01">Filter By Status</label>
+                    </div>
+                    <select class="select input-group-sm form-control" id="inputGroupSelect01" [(ngModel)]="status"
+                      (change)="submitSearch()">
+                      <option value="0">All</option>
+                      <option value="1">Active</option>
+                      <option value="2">InActive</option>
+                    </select>
+                  </div>
+                </th>
+                <th colspan="1" class="text-center">
+                    <div class="input-group input-group form-control">
+                      <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Filter By Course</label>
+                      </div>
+                      <select class="select input-group-sm form-control" data-toggle="select2" id="inputGroupSelect01" [(ngModel)]="courseID"
+                        (change)="submitSearch()" name="courseID">
+                        <option value="0">All</option>
+                        <option *ngFor="let course of courseList; index as i" value="{{course.ncourse_id }}">{{course.scourse_title }}</option>
+                      </select>
+                    </div>
+                </th>
+                <th colspan="1" class="text-center">
+                    <div class="input-group input-group form-control">
+                      <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Filter By File Format</label>
+                      </div>
+                      <select class="select input-group-sm form-control" id="inputGroupSelect01" [(ngModel)]="fileType"
+                        (change)="submitSearch()">
+                        <option value="0">All</option>
+                        <option value="1">File</option>
+                        <option value="2">Video</option>
+                      </select>
+                    </div>
+                </th>
+                <th colspan="1" class="text-center">
+                  <div class="input-group input-group form-control">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="inputGroupSelect01">Order By</label>
+                    </div>
+                    <select class="select input-group-sm form-control" id="inputGroupSelect01" [(ngModel)]="orderKey"
+                      (change)="submitSearch()">
+                      <option value="0">Choose</option>
+                      <option value="1">ID</option>
+                      <option value="2">Name</option>
+                    </select>
+                  </div>
+                </th>
+                <th colspan="1" class="text-center">
+                  <div class="input-group input-group form-control">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="inputGroupSelect01">Order By</label>
+                    </div>
+                    <select class="select input-group-sm form-control" id="inputGroupSelect01" [(ngModel)]="orderType"
+                      (change)="submitSearch()">
+                      <option value="0">Choose</option>
+                      <option value="1">ASC</option>
+                      <option value="2">DESC</option>
+                    </select>
+                  </div>
+                </th>
+                <th colspan="2" class="text-center">
+                  <div class="input-group input-group form-control">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="inputGroupSelect01">Search Any Keyword</label>
+                    </div>
+                    <input type="text" class="input-group-sm form-control" (keyup)="submitSearch()" type="text"
+                      placeholder="Search Course Name" [(ngModel)]="keyword">
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <thead>
+              <tr>
+                <th scope="col" class="text-center">#</th>
+                <th scope="col" class="text-center">Title</th>
+                <th scope="col" class="text-center">Course Name</th>
+                <th scope="col" class="text-center">File Type</th>
+                <th scope="col" class="text-center">Duration</th>
+                <th scope="col" class="text-center">Status</th>
+                <th scope="col" class="text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let lesson of lessons; index as i">
+                <th scope="row" class="text-center">{{ lesson.id }}</th>
+                <td class="text-center">
+                  {{ lesson.title }}
+                </td>
+                <td class="text-center">
+                    {{ lesson.scourse_title }}
+                </td>
+                <td class="text-center">
+                    {{ lesson.fileType }}
+                </td>
+                <td class="text-center">
+                    {{ lesson.duration }}
+                </td>
+                <td class="text-center">
+                  <span
+                    [ngClass]="['badge',(lesson.status===1)===true?'btn-success':'btn-danger']">
+                    <span [ngClass]="[(lesson.status===1)===true?'invisible':'hidden']">.</span>
+                    {{ lesson.statusName }}
+                    <span [ngClass]="[(lesson.status===1)===true?'invisible':'hidden']">.</span>
+                  </span>
+                </td>
+                <td class="text-center">
+                  <button type="button" routerLink="{{lesson.id}}" class="btn btn-primary" data-toggle="tooltip" data-placement="right"
+                    title="Edit record # {{lesson.id}}"
+                    data-delay='{"show":"500", "hide":"100"}'
+                    >
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  </button>&nbsp;&nbsp;
+                  <button type="button" (click)="submitUpdateStatus(lesson.id, 0)" data-toggle="tooltip"
+                    data-delay='{"show":"500", "hide":"100"}'
+                    data-placement="right" title="Deactivate record # {{lesson.id}}"
+                    [ngClass]="['btn btn-danger',(lesson.status===1)===true?'':'hide']"><i class="fa fa-ban"
+                      aria-hidden="true"></i>
+                  </button>
+                  <button type="button" (click)="submitUpdateStatus(lesson.id, 1)" data-toggle="tooltip"
+                    data-placement="right" title="Activate record # {{lesson.id}}"
+                    [ngClass]="['btn btn-success',(lesson.status===1)===true?'hide':'']"><i class="fa fa-plus-circle"
+                      aria-hidden="true"
+                      data-delay='{"show":"500", "hide":"100"}'
+                      ></i>
+                  </button>
+                </td>
+  
+              </tr>
+  
+              <tr>
+                <td class="text-center" colspan="8">
+                  <app-pagination *ngIf="totalPageList" [paginationTotal]="totalPageList"
+                    [paginationTotaPage]="totalPageNumber"></app-pagination>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>

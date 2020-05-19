@@ -5,7 +5,7 @@
     "paths": {
       "@shared/*":["./app/shared/*"],
       "@pages/*":["./app/pages/*"],
-      "@pagesAdmin/*":["./app/pages/admin*"],
+      "@pagesAdmin/*":["./app/pages/admin/*"],
       "@environment/*":["./environments/*"],
       "@sharedPages/*":["./app/shared/pages/*"],
       "@sharedPagesAdmin/*":["./app/shared/pages/admin/*"],

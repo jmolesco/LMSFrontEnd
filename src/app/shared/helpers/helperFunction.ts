@@ -6,6 +6,7 @@ function dataFilter(data){
         value.statusName = value.status ===1?"Active":"InActive";
         value.nuser_picture = environment.imageProfile + value.nuser_picture;
         value.ndefault_pageview_name = value.ndefault_pageview===1?"User":value.ndefault_pageview===2?"Parent":"Admin";
+        value.fileType = value.attachment_type ===1?"File":"Video";
         newData.push(value);
       });
     return newData;
