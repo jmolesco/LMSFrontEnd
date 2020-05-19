@@ -1,0 +1,195 @@
+<ol class="breadcrumb">
+    <li><a routerLink="/">Dashboard</a></li>
+    <li><a routerLink="/admin/lesson">Lesson Management</a></li>
+    <li><a routerLink="/admin/lesson">Lesson</a></li>
+    <li class="active">Lesson Detail</li>
+</ol>
+<div class="row">
+    <div class="col-xs-12 col-lg-12">
+        <div class="panel panel-default paper-shadow">
+            <div class="panel-heading">
+                <div class="media v-middle">
+                    <div class="media-left">
+                        <div class="bg-light-blue-300 text-white">
+                            <div class="panel-body">
+                                <i class="fa fa-bars fa-fw fa-2x"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="text-headline">
+                            {{actionType}} Lesson
+                        </h4>
+                    </div>
+                    <div class="media-right media-padding">
+                        <button routerLink="/admin/lesson" type="button" class="btn btn-primary paper-shadow relative"
+                            data-z="0.5" data-hover-z="1" data-animated="">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-left"
+                                aria-hidden="true"></i>&nbsp;&nbsp;Go
+                            Back&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <form (ngSubmit)="functionState===false?submitInsertRecord():submitEditRecord()" #detailForm="ngForm">
+                    <div class="col-md-8">
+
+                        <div class="form-group" *ngIf="functionState">
+                            <label for="inputEmail3" class="col-md-12 control-label">Lesson ID </label>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input class="input form-control" type="text" placeholder="Lesson ID"
+                                            [(ngModel)]="id" name="id" [disabled]="true">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-md-12 control-label">Title</label>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input class="input form-control" type="text" placeholder="Title"
+                                            [(ngModel)]="title" #titleInput="ngModel" name="title" required />
+                                        <p class="help btn-danger">
+                                            {{varNames.title}}
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-md-12 control-label">Duration</label>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input class="input form-control" type="number" placeholder="Duration"
+                                            [(ngModel)]="duration" #durationInput="ngModel" name="duration" required />
+                                        <p class="help btn-danger">
+                                           {{varNames.duration}}
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-md-12 control-label">Course Name</label>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                            <select id="country" data-toggle="select2" class="input form-control"
+                                            [(ngModel)]="courseId" #courseIdInput="ngModel" name="courseId"
+                                            >
+                                                <option value="0">Choose Course</option>
+                                                <option *ngFor="let course of courseList; index as i" value="{{course.ncourse_id }}">{{course.scourse_title}}</option>
+                                              </select>
+                                              <p class="help btn-danger">
+                                                {{varNames.courseId}}
+                                            </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-md-12 control-label">Attachment Type</label>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <select class="select input-group-sm form-control" id="inputGroupSelect01" [(ngModel)]="attachmentType"
+                                        #attachmentTypeInput="ngModel" name="attachmentType" 
+                                        (change)="handleFileType($event.target)"
+                                        >
+                                            <option value=0>Choose Attachment</option>
+                                            <option value="1">File</option>
+                                            <option value="2">Video</option>
+                                        </select>
+                                        <p class="help btn-danger">
+                                            {{varNames.attachmentType}}
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-md-12 control-label">Summary / Description</label>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <textarea class="input form-control" type="text" rows="12"
+                                            placeholder="Summary" [(ngModel)]="summary"
+                                            #summaryInput="ngModel" name="summary" required> </textarea>
+                                            <p class="help btn-danger">
+                                                {{varNames.summary}}
+                                            </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">&nbsp;</div>
+                            <div class="row text-center">
+                                <div class="col-md-12 ">
+                                    <button type="submit" class="btn btn-primary paper-shadow relative" data-z="0.5"
+                                        data-hover-z="1" data-animated [disabled]="detailForm.invalid">Submit
+                                        Record</button>
+                                        &nbsp;
+                                    <button class="btn btn-default"
+                                        routerLink="/admin/lesson">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Go
+                                        Back&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-md-12 control-label">Upload {{fileType}}</label>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input class="input form-control" type="file" placeholder="Upload Photo"
+                                            [(ngModel)]="photo" #photoInput="ngModel" name="photo" 
+                                            (change)="handleFileInput($event.target.files)"
+                                            />
+                                    </div>
+                                    <p class="help btn-danger">
+                                        {{varNames.attachment}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <!-- <img src="{{photoPath}}"  style="width: 100%;"/> -->
+                            <!-- <video id="my_video_1" class="video-js vjs-default-skin" width="100%" height="267px" controls preload="none"
+                                poster='http://video-js.zencoder.com/oceans-clip.jpg'
+                                data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
+                                <source src="https://vjs.zencdn.net/v/oceans.mp4" type='video/mp4' />
+                                <source src="https://vjs.zencdn.net/v/oceans.webm" type='video/webm' />
+                            </video> -->
+                            <video id="my_video_1" class="video-js vjs-default-skin" width="100%" height="267px" controls preload="none"
+                            poster='{{photoPath}}'
+                            data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
+                            <source src="{{photoPath}}" type='video/mp4' />
+                            <source src="{{photoPath}}" type='video/webm' />
+                            <source src="{{photoPath}}" type='video/ogg' />
+                        </video>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

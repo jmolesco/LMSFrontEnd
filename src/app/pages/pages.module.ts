@@ -13,3 +13,4 @@ export * from './admin/course/course.module';
 export * from './admin/user/user.module';
 export * from './admin/dashboard/dashboard.module';
 export { DashboardModule as UserDashboardModule} from './user/dashboard/dashboard.module';
+export * from './admin/lesson/lesson.module';

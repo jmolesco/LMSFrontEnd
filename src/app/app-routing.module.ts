@@ -19,11 +19,11 @@ const routes: Routes = [
     loadChildren:()=> import("./pages/pages.module").then(m=>m.DashboardModule),
     canActivate:[AdminAuthGuard]
   },
-  // {
-  //   path:"",
-  //   loadChildren:()=> import("./pages/pages.module").then(m=>m.DashboardModule),
-  //   canActivate:[AdminAuthGuard]
-  // },
+  {
+    path:"admin/lesson",
+    loadChildren:()=> import("./pages/pages.module").then(m=>m.LessonModule),
+    canActivate:[AdminAuthGuard]
+  },
   {
     path:"admin/course",
     loadChildren:()=> import("./pages/pages.module").then(m=>m.CourseModule),
